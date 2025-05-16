@@ -101,7 +101,8 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
                           width: context.percentWidth(.9),
                           height: 76,
                           onPressed: () async {
-                            await controller.checkSession();
+                            // await controller.checkSession();
+                            Navigator.of(context).pushNamed('/login');
                           },
                         ),
                       ],

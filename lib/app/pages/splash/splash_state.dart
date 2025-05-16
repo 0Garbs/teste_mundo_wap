@@ -4,12 +4,7 @@ import 'package:equatable/equatable.dart';
 // part 'splash_state.g.dart';
 
 // @match
-enum SplashStateStatus {
-  initial,
-  loading,
-  loaded,
-  error,
-}
+enum SplashStateStatus { initial, loading, loaded, error }
 
 class SplashState extends Equatable {
   final SplashStateStatus status;
@@ -23,9 +18,9 @@ class SplashState extends Equatable {
   });
 
   const SplashState.initial()
-      : status = SplashStateStatus.initial,
-        errorMessage = null,
-        logged = false;
+    : status = SplashStateStatus.initial,
+      errorMessage = null,
+      logged = false;
 
   @override
   List<Object?> get props => [status, errorMessage, logged];
