@@ -8,16 +8,18 @@ import '../rest_client/rest_client_impl.dart';
 class ApplicationBinding extends StatelessWidget {
   final Widget child;
 
-  const ApplicationBinding({
-    super.key,
-    required this.child,
-  });
+  const ApplicationBinding({super.key, required this.child});
 
   @override
   Widget build(BuildContext context) {
     return MultiProvider(
       providers: [
-        Provider<RestClient>(create: (context) => RestClientImpl(baseUrl: Env.i['base'] ?? 'localhost:8080')),
+        Provider<RestClient>(
+          create:
+              (context) => RestClientImpl(
+                baseUrl: Env.i['base_url'] ?? 'localhost:8080',
+              ),
+        ),
       ],
       child: child,
     );
