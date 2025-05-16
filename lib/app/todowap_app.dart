@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'core/provider/application_binding.dart';
 import 'core/ui/theme/theme_config.dart';
+import 'pages/login/login_router.dart';
 import 'pages/splash/splash_router.dart';
 
 class TodoWapApp extends StatelessWidget {
@@ -15,6 +16,7 @@ class TodoWapApp extends StatelessWidget {
         theme: ThemeConfig.theme,
         routes: {
           '/': (context) => SplashRouter.page,
+          '/login': (context) => LoginRouter.page,
         },
         localizationsDelegates: const [
           GlobalWidgetsLocalizations.delegate,
