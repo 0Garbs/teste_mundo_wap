@@ -16,7 +16,7 @@ class SplashController extends Cubit<SplashState> {
 
       emit(state.copyWith(status: SplashStateStatus.loading));
 
-      final perfil = await Perfil().select().toSingle();
+      final perfil = await User().select().toSingle();
 
       logged = perfil != null;
 

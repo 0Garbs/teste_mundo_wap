@@ -5,21 +5,18 @@
     "version": "0.2.0",
     "configurations": [
         {
-            "name": "app",
-            "request": "launch",
-            "type": "dart"
-        },
-        {
-            "name": "app (profile mode)",
+            "name": "dev",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "profile"
+            "program": "lib/app/core/config/env/main_dev.dart",
+            "args": ["--flavor", "dev", "target", "lib/app/core/config/env/main_dev.dart"]
         },
         {
-            "name": "app (release mode)",
+            "name": "prod",
             "request": "launch",
             "type": "dart",
-            "flutterMode": "release"
-        }
+            "program": "lib/app/core/config/env/main_prod.dart",
+            "args": ["--flavor", "prod", "target", "lib/app/core/config/env/main_prod.dart"]
+        },
     ]
 }

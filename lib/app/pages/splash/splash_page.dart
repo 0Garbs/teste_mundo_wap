@@ -37,7 +37,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
             case SplashStateStatus.loaded:
               hideLoader();
               if (state.logged == true) {
-                Navigator.of(context).pushReplacementNamed('/page_holder');
+                Navigator.of(context).pushReplacementNamed('/home');
               }
               break;
             case SplashStateStatus.error:
@@ -101,7 +101,8 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
                           width: context.percentWidth(.9),
                           height: 76,
                           onPressed: () async {
-                            await controller.checkSession();
+                            // await controller.checkSession();
+                            Navigator.of(context).pushNamed('/login');
                           },
                         ),
                       ],
