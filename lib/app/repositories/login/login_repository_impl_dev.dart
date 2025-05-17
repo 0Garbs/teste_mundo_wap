@@ -1,7 +1,10 @@
-import 'package:teste_mundo_wap/app/dto/login_dto.dart';
+import 'dart:developer';
 
-import 'package:teste_mundo_wap/app/models/model_login.dart';
-
+import '../../core/database/db_todowap.dart';
+import '../../core/exceptions/repository_exception.dart';
+import '../../dto/login_dto.dart';
+import '../../models/model_login.dart';
+import '../../models/model_user.dart';
 import 'login_repository.dart';
 
 class LoginRepositoryImplDev implements LoginRepository {
@@ -9,6 +12,23 @@ class LoginRepositoryImplDev implements LoginRepository {
   Future<ModelLogin> login(LoginDto credentials) async {
     await Future.delayed(Duration(seconds: 2));
     return ModelLogin.fromJson(loginJson);
+  }
+
+  @override
+  Future<void> saveUser(ModelUser user) async {
+    try {
+      final dbUser = User(
+        user: user.user,
+        password: user.password,
+        name: user.name,
+        profile: user.profile,
+      );
+
+      await dbUser.save();
+    } on Exception catch (e, s) {
+      log('Erro ao gravar usuário', error: e, stackTrace: s);
+      throw RepositoryException(message: 'Erro ao gravar usuário');
+    }
   }
 
   final loginJson = '''

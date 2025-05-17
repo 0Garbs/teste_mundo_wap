@@ -1,4 +1,5 @@
 import 'package:bloc/bloc.dart';
+import 'package:teste_mundo_wap/app/core/database/db_todowap.dart';
 import 'package:teste_mundo_wap/app/core/ui/base_state/base_state_singleton.dart';
 import 'package:teste_mundo_wap/app/models/model_user.dart';
 
@@ -24,9 +25,17 @@ class LoginController extends Cubit<LoginState> {
         LoginDto(user: user, password: password),
       );
 
-      // saveUser
+      final newUser = ModelUser(
+        user: user,
+        password: password,
+        name: result.user.name,
+        profile: result.user.profile,
+      );
+
+      _loginRepository.saveUser(newUser);
+
       // saveTodos
-      // setSingletonInfo
+
       BaseStateSingleton.i.setUser(
         ModelUser(
           user: user,
