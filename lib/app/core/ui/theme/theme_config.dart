@@ -15,13 +15,13 @@ class ThemeConfig {
 
   static final theme = ThemeData(
     scaffoldBackgroundColor: ColorsApp.i.background,
-    drawerTheme: const DrawerThemeData(
-      scrimColor: Colors.transparent,
-    ),
+    drawerTheme: const DrawerThemeData(scrimColor: Colors.transparent),
     useMaterial3: true,
     appBarTheme: AppBarTheme(
-      titleTextStyle:
-          TextStyles.i.textMedium.copyWith(fontSize: 18, color: Colors.white),
+      titleTextStyle: TextStyles.i.textMedium.copyWith(
+        fontSize: 18,
+        color: Colors.white,
+      ),
       backgroundColor: ColorsApp.i.primary,
       elevation: 0,
       centerTitle: true,
@@ -33,8 +33,9 @@ class ThemeConfig {
       primary: ColorsApp.i.primary,
       secondary: ColorsApp.i.secondary,
     ),
-    elevatedButtonTheme:
-        ElevatedButtonThemeData(style: AppStyles.i.primaryButton),
+    elevatedButtonTheme: ElevatedButtonThemeData(
+      style: AppStyles.i.primaryButton,
+    ),
     inputDecorationTheme: InputDecorationTheme(
       fillColor: Colors.white,
       filled: true,

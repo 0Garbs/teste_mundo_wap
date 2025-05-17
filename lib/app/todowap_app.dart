@@ -5,6 +5,7 @@ import 'core/ui/theme/theme_config.dart';
 import 'pages/home/home_router.dart';
 import 'pages/login/login_router.dart';
 import 'pages/splash/splash_router.dart';
+import 'pages/todo/todo_router.dart';
 
 class TodoWapApp extends StatelessWidget {
   const TodoWapApp({super.key});
@@ -19,6 +20,7 @@ class TodoWapApp extends StatelessWidget {
           '/': (context) => SplashRouter.page,
           '/login': (context) => LoginRouter.page,
           '/home': (context) => HomeRouter.page,
+          '/todo': (context) => TodoRouter.page,
         },
         localizationsDelegates: const [
           GlobalWidgetsLocalizations.delegate,
