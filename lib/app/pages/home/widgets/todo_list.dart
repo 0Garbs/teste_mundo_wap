@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:teste_mundo_wap/app/core/ui/helpers/size_extensions.dart';
+import 'package:teste_mundo_wap/app/core/ui/styles/text_styles.dart';
 
 import '../../../models/model_todo_item.dart';
 import 'todo_card.dart';
@@ -28,12 +29,21 @@ class TodoList extends StatelessWidget {
       return [
         Padding(
           padding: EdgeInsets.fromLTRB(
-            10.0,
-            context.percentHeight(.08),
-            10.0,
+            0.0,
+            context.percentHeight(.05),
+            0.0,
             0.0,
           ),
-          child: Placeholder(),
+          child: Column(
+            children: [
+              Image.asset('assets/images/empty_box.png', fit: BoxFit.cover),
+              Text(
+                'Nenhuma tarefa encontrada,\nvolte mais tarde',
+                style: context.textStyles.textMedium.copyWith(fontSize: 18),
+                textAlign: TextAlign.center,
+              ),
+            ],
+          ),
         ),
       ];
     }

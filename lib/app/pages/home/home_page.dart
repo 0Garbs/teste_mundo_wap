@@ -67,14 +67,14 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                     name: BaseStateSingleton.i.user?.name,
                     qtyTodo: state.todos.length,
                   ),
-                  const SizedBox(height: 22.0),
+                  const SizedBox(height: 24.0),
                   Text(
                     'Tarefas',
                     style: context.textStyles.textMedium.copyWith(
-                      fontSize: 22.0,
+                      fontSize: 24.0,
                     ),
                   ),
-                  const SizedBox(height: 15.0),
+                  const SizedBox(height: 18.0),
                   TodoList(
                     todos: state.todos,
                     onDelete: () {
