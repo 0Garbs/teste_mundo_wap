@@ -37,13 +37,13 @@ android {
     productFlavors {
         create("prod") {
             dimension = "default"
-            resValue("string", "app_name", "MobTeam")
+            resValue("string", "app_name", "TodoWap")
         }
 
         create("dev") {
             dimension = "default"
             applicationIdSuffix = ".dev"
-            resValue("string", "app_name", "MobTeam-dev")
+            resValue("string", "app_name", "TodoWap-dev")
         }
     }
 }

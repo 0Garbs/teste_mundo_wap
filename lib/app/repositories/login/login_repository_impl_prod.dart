@@ -23,6 +23,10 @@ class LoginRepositoryImplProd implements LoginRepository {
         data: body,
       );
 
+      if (result.statusCode! < 200 && result.statusCode! >= 300) {
+        throw Exception();
+      }
+
       return ModelLogin.fromMap(result.data);
     } on Exception catch (e, s) {
       log('Erro ao realizar login', error: e, stackTrace: s);
