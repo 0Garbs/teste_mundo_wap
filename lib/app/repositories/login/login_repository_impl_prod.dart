@@ -8,10 +8,10 @@ import 'package:teste_mundo_wap/app/models/model_login.dart';
 import '../../core/rest_client/rest_client.dart';
 import 'login_repository.dart';
 
-class LoginRepositoryImpl implements LoginRepository {
+class LoginRepositoryImplProd implements LoginRepository {
   final RestClient _client;
 
-  LoginRepositoryImpl({required RestClient client}) : _client = client;
+  LoginRepositoryImplProd({required RestClient client}) : _client = client;
 
   @override
   Future<ModelLogin> login(LoginDto credentials) async {

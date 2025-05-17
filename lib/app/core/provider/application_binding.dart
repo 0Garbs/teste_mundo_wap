@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
-import '../config/env/env.dart';
 import '../rest_client/rest_client.dart';
 import '../rest_client/rest_client_impl.dart';
+import '../ui/base_state/base_state_singleton.dart';
 
 class ApplicationBinding extends StatelessWidget {
   final Widget child;
@@ -16,9 +16,8 @@ class ApplicationBinding extends StatelessWidget {
       providers: [
         Provider<RestClient>(
           create:
-              (context) => RestClientImpl(
-                baseUrl: Env.i['base_url'] ?? 'localhost:8080',
-              ),
+              (context) =>
+                  RestClientImpl(baseUrl: BaseStateSingleton.i.baseUrl),
         ),
       ],
       child: child,

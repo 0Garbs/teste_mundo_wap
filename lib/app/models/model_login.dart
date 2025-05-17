@@ -23,7 +23,7 @@ class ModelLogin {
     return ModelLogin(
       user: ModelUser.fromMap(map['user']),
       todos: List<ModelTodo>.from(
-        map['todos']?.map((x) => ModelTodo.fromMap(x)) ?? const [],
+        map['user']['tasks']?.map((x) => ModelTodo.fromMap(x)) ?? const [],
       ),
     );
   }
