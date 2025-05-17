@@ -1,5 +1,4 @@
 import 'package:bloc/bloc.dart';
-import 'package:teste_mundo_wap/app/core/database/db_todowap.dart';
 import 'package:teste_mundo_wap/app/core/ui/base_state/base_state_singleton.dart';
 import 'package:teste_mundo_wap/app/models/model_user.dart';
 
