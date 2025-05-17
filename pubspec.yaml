@@ -2,7 +2,7 @@ name: teste_mundo_wap
 description: "A Mundo Wap test project"
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 
-version: 0.1.0+1000
+version: 0.2.0+1001
 
 environment:
   sdk: ^3.7.2
