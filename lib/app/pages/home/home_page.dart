@@ -80,8 +80,12 @@ class _HomePageState extends BaseState<HomePage, HomeController> {
                     onDelete: () {
                       debugPrint('Delete');
                     },
-                    onSelect: () {
-                      debugPrint('Select');
+                    onSelect: () async {
+                      final navigator = Navigator.of(context);
+
+                      final result = await navigator.pushNamed('/todo');
+
+                      debugPrint(result.toString());
                     },
                   ),
                 ],
