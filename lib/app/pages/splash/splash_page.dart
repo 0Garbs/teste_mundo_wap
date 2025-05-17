@@ -37,7 +37,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
             case SplashStateStatus.loaded:
               hideLoader();
               if (state.logged == true) {
-                Navigator.of(context).pushReplacementNamed('/page_holder');
+                Navigator.of(context).pushReplacementNamed('/home');
               }
               break;
             case SplashStateStatus.error:

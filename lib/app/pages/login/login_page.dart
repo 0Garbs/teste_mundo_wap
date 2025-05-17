@@ -36,9 +36,7 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
               break;
             case LoginStateStatus.loaded:
               hideLoader();
-              // if (state.logged == true) {
-              //   Navigator.of(context).pushReplacementNamed('/page_holder');
-              // }
+              Navigator.of(context).pushReplacementNamed('/home');
               break;
             case LoginStateStatus.error:
               hideLoader();
