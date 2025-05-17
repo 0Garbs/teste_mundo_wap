@@ -31,7 +31,7 @@ class ModelTodo {
   Map<String, dynamic> toMap() {
     return {
       'id': id,
-      'name': name,
+      'task_name': name,
       'description': description,
       'fields': fields.map((x) => x.toMap()).toList(),
     };
@@ -40,7 +40,7 @@ class ModelTodo {
   factory ModelTodo.fromMap(Map<String, dynamic> map) {
     return ModelTodo(
       id: map['id']?.toInt() ?? 0,
-      name: map['name'] ?? '',
+      name: map['task_name'] ?? '',
       description: map['description'] ?? '',
       fields: List<ModelField>.from(
         map['fields']?.map((x) => ModelField.fromMap(x)) ?? const [],

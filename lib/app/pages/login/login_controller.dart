@@ -1,9 +1,9 @@
 import 'package:bloc/bloc.dart';
-import 'package:teste_mundo_wap/app/core/ui/base_state/base_state_singleton.dart';
-import 'package:teste_mundo_wap/app/models/model_user.dart';
 
 import '../../core/exceptions/repository_exception.dart';
+import '../../core/ui/base_state/base_state_singleton.dart';
 import '../../dto/login_dto.dart';
+import '../../models/model_user.dart';
 import '../../repositories/login/login_repository.dart';
 import 'login_state.dart';
 
@@ -31,9 +31,9 @@ class LoginController extends Cubit<LoginState> {
         profile: result.user.profile,
       );
 
-      _loginRepository.saveUser(newUser);
+      await _loginRepository.saveUser(newUser);
 
-      // saveTodos
+      await _loginRepository.saveTodos(result.todos);
 
       BaseStateSingleton.i.setUser(
         ModelUser(

@@ -4,6 +4,7 @@ import '../../core/database/db_todowap.dart';
 import '../../core/exceptions/repository_exception.dart';
 import '../../dto/login_dto.dart';
 import '../../models/model_login.dart';
+import '../../models/model_todo.dart';
 import '../../models/model_user.dart';
 import 'login_repository.dart';
 
@@ -28,6 +29,36 @@ class LoginRepositoryImplDev implements LoginRepository {
     } on Exception catch (e, s) {
       log('Erro ao gravar usuário', error: e, stackTrace: s);
       throw RepositoryException(message: 'Erro ao gravar usuário');
+    }
+  }
+
+  @override
+  Future<void> saveTodos(List<ModelTodo> todos) async {
+    try {
+      for (var todo in todos) {
+        final dbTodo = TodoHeader(
+          id: todo.id,
+          name: todo.name,
+          description: todo.description,
+        );
+
+        await dbTodo.save();
+
+        for (var field in todo.fields) {
+          final dbField = TodoField(
+            id: field.id,
+            idTodo: todo.id,
+            label: field.label,
+            obligatory: field.obligatory,
+            type: field.type,
+          );
+
+          await dbField.save();
+        }
+      }
+    } on Exception catch (e, s) {
+      log('Erro ao gravar Tarefas', error: e, stackTrace: s);
+      throw RepositoryException(message: 'Erro ao gravar tarefas');
     }
   }
 
