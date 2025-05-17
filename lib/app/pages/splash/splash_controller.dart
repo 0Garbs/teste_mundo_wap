@@ -1,6 +1,8 @@
 import 'package:bloc/bloc.dart';
 
 import '../../core/database/db_todowap.dart';
+import '../../core/ui/base_state/base_state_singleton.dart';
+import '../../models/model_user.dart';
 import 'splash_state.dart';
 
 class SplashController extends Cubit<SplashState> {
@@ -18,7 +20,17 @@ class SplashController extends Cubit<SplashState> {
 
       final perfil = await User().select().toSingle();
 
-      logged = perfil != null;
+      if (perfil != null) {
+        logged = true;
+        BaseStateSingleton.i.setUser(
+          ModelUser(
+            user: perfil.user!,
+            password: perfil.password!,
+            name: perfil.name!,
+            profile: perfil.profile!,
+          ),
+        );
+      }
 
       emit(state.copyWith(status: SplashStateStatus.loaded, logged: logged));
     } catch (e) {

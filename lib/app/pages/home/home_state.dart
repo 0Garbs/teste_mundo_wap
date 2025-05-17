@@ -1,21 +1,37 @@
 import 'package:equatable/equatable.dart';
 
+import '../../models/model_todo_item.dart';
+
 enum HomeStateSatus { initial, loading, loaded, error }
 
 class HomeState extends Equatable {
   final HomeStateSatus status;
+  final List<ModelTodoItem> todos;
   final String? errorMessage;
 
-  const HomeState({required this.status, this.errorMessage});
+  const HomeState({
+    required this.status,
+    this.todos = const [],
+    this.errorMessage,
+  });
 
   const HomeState.initial()
     : status = HomeStateSatus.initial,
+      todos = const [],
       errorMessage = null;
 
   @override
-  List<Object?> get props => [status, errorMessage];
+  List<Object?> get props => [status, todos, errorMessage];
 
-  HomeState copyWith({HomeStateSatus? status, String? errorMessage}) {
-    return HomeState(status: status ?? this.status, errorMessage: errorMessage);
+  HomeState copyWith({
+    HomeStateSatus? status,
+    List<ModelTodoItem>? todos,
+    String? errorMessage,
+  }) {
+    return HomeState(
+      status: status ?? this.status,
+      todos: todos ?? this.todos,
+      errorMessage: errorMessage,
+    );
   }
 }
