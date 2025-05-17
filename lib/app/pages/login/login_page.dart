@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:teste_mundo_wap/app/core/ui/helpers/size_extensions.dart';
-import 'package:teste_mundo_wap/app/core/ui/styles/colors_app.dart';
 
 import '../../core/ui/base_state/base_state.dart';
 import '../../core/ui/widgets/custom_button.dart';
@@ -16,6 +15,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends BaseState<LoginPage, LoginController> {
+  final _userController = TextEditingController();
+  final _passwordController = TextEditingController();
+
   @override
   void onReady() {
     controller.initializing();
@@ -29,14 +31,14 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
         listener: (context, state) async {
           switch (state.status) {
             case LoginStateStatus.initial:
-              // await controller.checkSession();
               break;
             case LoginStateStatus.loading:
               showLoader();
               break;
             case LoginStateStatus.loaded:
               hideLoader();
-              Navigator.of(context).pushReplacementNamed('/home');
+              Navigator.of(context).pop();
+              Navigator.of(context).popAndPushNamed('/home');
               break;
             case LoginStateStatus.error:
               hideLoader();
@@ -58,55 +60,52 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
         },
         builder: (context, state) {
           return SafeArea(
-            child: ColoredBox(
-              color: context.colors.background,
-              child: Stack(
-                children: [
-                  Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      top: 50,
-                      right: 20,
-                    ),
-                    child: Align(
-                      alignment: Alignment.topCenter,
-                      child: SizedBox(
-                        width: context.screenWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [Text('Login')],
+            child: Center(
+              child: SingleChildScrollView(
+                padding: const EdgeInsets.symmetric(horizontal: 20),
+                child: Column(
+                  mainAxisSize: MainAxisSize.min,
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.only(
+                        left: 20,
+                        top: 50,
+                        right: 20,
+                      ),
+                      child: Align(
+                        alignment: Alignment.topCenter,
+                        child: SizedBox(
+                          width: context.screenWidth,
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [Text('Login')],
+                          ),
                         ),
                       ),
                     ),
-                  ),
-                  // const SizedBox(height: 25),
-                  Center(
-                    child: Column(
-                      children: [
-                        SizedBox(height: context.percentHeight(.57)),
-                        SizedBox(height: context.percentHeight(.08)),
-                        CustomButton(
-                          label: 'Criar',
-                          width: context.percentWidth(.9),
-                          height: 76,
-                          onPressed: () async {},
-                        ),
-                        SizedBox(height: context.percentHeight(.02)),
-                        CustomButton(
-                          label: 'Entrar',
-                          width: context.percentWidth(.9),
-                          height: 76,
-                          onPressed: () async {
-                            await controller.login(
-                              user: 'teste.mobile',
-                              password: '1234',
-                            );
-                          },
-                        ),
-                      ],
+                    SizedBox(height: context.percentHeight(.08)),
+                    Text('User:'),
+                    SizedBox(height: 8.0),
+                    TextField(controller: _userController),
+                    SizedBox(height: context.percentHeight(.04)),
+                    Text('Password:'),
+                    SizedBox(height: 8.0),
+                    TextField(controller: _passwordController),
+                    SizedBox(height: context.percentHeight(.1)),
+                    CustomButton(
+                      label: 'Entrar',
+                      width: context.screenWidth,
+                      height: 76,
+                      onPressed: () async {
+                        await controller.login(
+                          user: _userController.text.trim(),
+                          password: _passwordController.text.trim(),
+                        );
+                      },
                     ),
-                  ),
-                ],
+                  ],
+                ),
               ),
             ),
           );

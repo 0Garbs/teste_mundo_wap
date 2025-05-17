@@ -11,8 +11,17 @@ import 'login_repository.dart';
 class LoginRepositoryImplDev implements LoginRepository {
   @override
   Future<ModelLogin> login(LoginDto credentials) async {
-    await Future.delayed(Duration(seconds: 2));
-    return ModelLogin.fromJson(loginJson);
+    try {
+      if (credentials.user != 'teste.mobile' ||
+          credentials.password != '1234') {
+        throw Exception();
+      }
+      await Future.delayed(Duration(seconds: 2));
+      return ModelLogin.fromJson(loginJson);
+    } on Exception catch (e, s) {
+      log('Erro ao realizar login', error: e, stackTrace: s);
+      throw RepositoryException(message: 'Credenciais inválidas');
+    }
   }
 
   @override
