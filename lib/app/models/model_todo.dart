@@ -6,12 +6,14 @@ class ModelTodo {
   final String name;
   final String description;
   final List<ModelField> fields;
+  final bool done;
 
   ModelTodo({
     required this.id,
     required this.name,
     required this.description,
     required this.fields,
+    this.done = false,
   });
 
   ModelTodo copyWith({
@@ -19,12 +21,14 @@ class ModelTodo {
     String? name,
     String? description,
     List<ModelField>? fields,
+    bool? done,
   }) {
     return ModelTodo(
       id: id ?? this.id,
       name: name ?? this.name,
       description: description ?? this.description,
       fields: fields ?? this.fields,
+      done: done ?? this.done,
     );
   }
 

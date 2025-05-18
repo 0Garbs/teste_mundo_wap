@@ -1,5 +1,7 @@
-import '../../models/model_todo_item.dart';
+import '../../models/model_todo.dart';
 
 abstract class TodoRepository {
-  Future<List<ModelTodoItem>> getTodo();
+  Future<List<ModelTodo>> getTodo();
+
+  Future<void> finish(String answer1, String answer2, ModelTodo todo);
 }

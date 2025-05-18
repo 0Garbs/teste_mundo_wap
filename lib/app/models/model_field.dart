@@ -28,15 +28,20 @@ class ModelField {
   }
 
   Map<String, dynamic> toMap() {
-    return {'id': id, 'label': label, 'obligatory': obligatory, 'type': type};
+    return {
+      'id': id,
+      'label': label,
+      'required': obligatory,
+      'field_type': type,
+    };
   }
 
   factory ModelField.fromMap(Map<String, dynamic> map) {
     return ModelField(
       id: map['id']?.toInt() ?? 0,
       label: map['label'] ?? '',
-      obligatory: map['obligatory'] ?? false,
-      type: map['type'] ?? '',
+      obligatory: map['required'] ?? false,
+      type: map['field_type'] ?? '',
     );
   }
 

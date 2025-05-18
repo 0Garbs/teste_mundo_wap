@@ -1,18 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:teste_mundo_wap/app/core/ui/styles/text_styles.dart';
 
+import '../../../models/model_todo.dart';
+
 class TodoCard extends StatefulWidget {
-  final String title;
-  final String description;
-  final bool done;
-  final Function() onSelect;
+  final ModelTodo item;
+  final Function(ModelTodo) onSelect;
   final Function() onDelete;
 
   const TodoCard({
     super.key,
-    required this.title,
-    required this.description,
-    this.done = false,
+    required this.item,
     required this.onSelect,
     required this.onDelete,
   });
@@ -25,7 +23,7 @@ class _TodoCardState extends State<TodoCard> {
   @override
   Widget build(BuildContext context) {
     return InkWell(
-      onTap: widget.onSelect,
+      onTap: () => widget.onSelect(widget.item),
       child: Card(
         color: Colors.white,
         elevation: 0.0,
@@ -39,11 +37,11 @@ class _TodoCardState extends State<TodoCard> {
             ),
             Expanded(
               flex: 10,
-              child: content(widget.title, widget.description),
+              child: content(widget.item.name, widget.item.description),
             ),
             Checkbox(
-              value: false,
-              onChanged: (value) => widget.onSelect(),
+              value: widget.item.done,
+              onChanged: (value) => widget.onSelect(widget.item),
               side: const BorderSide(color: Colors.grey, width: 2),
             ),
           ],

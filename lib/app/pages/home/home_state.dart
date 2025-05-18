@@ -1,12 +1,12 @@
 import 'package:equatable/equatable.dart';
 
-import '../../models/model_todo_item.dart';
+import '../../models/model_todo.dart';
 
 enum HomeStateSatus { initial, loading, loaded, error }
 
 class HomeState extends Equatable {
   final HomeStateSatus status;
-  final List<ModelTodoItem> todos;
+  final List<ModelTodo> todos;
   final String? errorMessage;
 
   const HomeState({
@@ -25,7 +25,7 @@ class HomeState extends Equatable {
 
   HomeState copyWith({
     HomeStateSatus? status,
-    List<ModelTodoItem>? todos,
+    List<ModelTodo>? todos,
     String? errorMessage,
   }) {
     return HomeState(

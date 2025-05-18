@@ -2,13 +2,13 @@ import 'package:flutter/material.dart';
 import 'package:teste_mundo_wap/app/core/ui/helpers/size_extensions.dart';
 import 'package:teste_mundo_wap/app/core/ui/styles/text_styles.dart';
 
-import '../../../models/model_todo_item.dart';
+import '../../../models/model_todo.dart';
 import 'todo_card.dart';
 
 class TodoList extends StatelessWidget {
-  final List<ModelTodoItem> todos;
+  final List<ModelTodo> todos;
   final Function() onDelete;
-  final Function() onSelect;
+  final Function(ModelTodo) onSelect;
 
   const TodoList({
     super.key,
@@ -24,7 +24,7 @@ class TodoList extends StatelessWidget {
     );
   }
 
-  List<Widget> todosList(List<ModelTodoItem> pTodos, BuildContext context) {
+  List<Widget> todosList(List<ModelTodo> pTodos, BuildContext context) {
     if (pTodos.isEmpty) {
       return [
         Padding(
@@ -52,26 +52,18 @@ class TodoList extends StatelessWidget {
     var undoneTodos = todos.where((todo) => !todo.done).toList();
 
     return [
-      ...doneTodos.map(
+      ...undoneTodos.map(
         (todo) => TodoCard(
-          title: todo.todo.name,
-          description: todo.todo.description,
-          done: todo.done,
+          item: todo,
           onDelete: onDelete,
-          onSelect: onSelect,
+          onSelect: (item) => onSelect(todo),
         ),
       ),
 
       if (doneTodos.isNotEmpty && undoneTodos.isNotEmpty) Divider(),
 
-      ...undoneTodos.map(
-        (todo) => TodoCard(
-          title: todo.todo.name,
-          description: todo.todo.description,
-          done: todo.done,
-          onDelete: onDelete,
-          onSelect: onSelect,
-        ),
+      ...doneTodos.map(
+        (todo) => TodoCard(item: todo, onDelete: () {}, onSelect: (item) {}),
       ),
     ];
   }

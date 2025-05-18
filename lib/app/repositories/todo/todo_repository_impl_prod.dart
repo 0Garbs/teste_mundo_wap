@@ -1,10 +1,14 @@
-import 'package:teste_mundo_wap/app/models/model_todo_item.dart';
-
+import '../../models/model_todo.dart';
 import 'todo_repository.dart';
 
 class TodoRepositoryImplProd implements TodoRepository {
   @override
-  Future<List<ModelTodoItem>> getTodo() {
+  Future<List<ModelTodo>> getTodo() {
+    throw UnimplementedError();
+  }
+
+  @override
+  Future<void> finish(String answer1, String answer2, ModelTodo todo) {
     throw UnimplementedError();
   }
 }

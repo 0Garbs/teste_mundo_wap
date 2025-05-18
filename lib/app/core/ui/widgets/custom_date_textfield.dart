@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 import 'package:intl/intl.dart' as intl;
 import 'package:teste_mundo_wap/app/core/ui/styles/text_styles.dart';
 
-enum CustomTextFieldType { date, weekDate, fullWeekDate, time }
+enum CustomDateTextFieldType { date, weekDate, fullWeekDate, time }
 
-class CustomTextField extends StatefulWidget {
+class CustomDateTextField extends StatefulWidget {
   final bool showicon;
   final TextEditingController controller;
   final bool isEditable;
-  final CustomTextFieldType type;
+  final CustomDateTextFieldType type;
   final bool hasPastAcess;
   final DateTime? initialDate;
   final DateTime? firstDate;
   final DateTime? lastDate;
 
-  const CustomTextField({
+  const CustomDateTextField({
     super.key,
     // this.label = '',
     this.showicon = false,
@@ -28,10 +28,10 @@ class CustomTextField extends StatefulWidget {
   });
 
   @override
-  State<CustomTextField> createState() => _CustomTextFieldState();
+  State<CustomDateTextField> createState() => _CustomDateTextFieldState();
 }
 
-class _CustomTextFieldState extends State<CustomTextField> {
+class _CustomDateTextFieldState extends State<CustomDateTextField> {
   @override
   Widget build(BuildContext context) {
     final IconData icon = CustomSettings.selectIcon(widget.type);
@@ -81,7 +81,7 @@ class CustomMethods {
 
   static Future showDateOrTimePicker({
     required bool isEditable,
-    required CustomTextFieldType type,
+    required CustomDateTextFieldType type,
     required bool hasPastAcess,
     required TextEditingController controller,
     required BuildContext context,
@@ -179,35 +179,35 @@ class CustomMethods {
 }
 
 class CustomSettings {
-  static intl.DateFormat selectFormat(CustomTextFieldType type) {
+  static intl.DateFormat selectFormat(CustomDateTextFieldType type) {
     switch (type) {
-      case CustomTextFieldType.date:
+      case CustomDateTextFieldType.date:
         return intl.DateFormat('dd/MM/yyyy');
-      case CustomTextFieldType.weekDate:
+      case CustomDateTextFieldType.weekDate:
         return intl.DateFormat("d 'de' MMMM 'de' y", 'pt_BR');
-      case CustomTextFieldType.fullWeekDate:
+      case CustomDateTextFieldType.fullWeekDate:
         return intl.DateFormat('EEEE, dd MMM yyyy', 'pt_BR');
       default:
         return intl.DateFormat('Hm');
     }
   }
 
-  static IconData selectIcon(CustomTextFieldType type) {
+  static IconData selectIcon(CustomDateTextFieldType type) {
     switch (type) {
-      case CustomTextFieldType.fullWeekDate ||
-            CustomTextFieldType.weekDate ||
-            CustomTextFieldType.date:
+      case CustomDateTextFieldType.fullWeekDate ||
+            CustomDateTextFieldType.weekDate ||
+            CustomDateTextFieldType.date:
         return Icons.event;
       default:
         return Icons.event;
     }
   }
 
-  static bool selectPicker(CustomTextFieldType type) {
+  static bool selectPicker(CustomDateTextFieldType type) {
     switch (type) {
-      case CustomTextFieldType.fullWeekDate ||
-            CustomTextFieldType.weekDate ||
-            CustomTextFieldType.date:
+      case CustomDateTextFieldType.fullWeekDate ||
+            CustomDateTextFieldType.weekDate ||
+            CustomDateTextFieldType.date:
         return true;
       default:
         return false;

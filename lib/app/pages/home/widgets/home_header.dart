@@ -17,8 +17,8 @@ class HomeHeader extends StatelessWidget {
           width: 60.0,
           child: ClipOval(
             child: CircleAvatar(
-              backgroundColor: context.colors.secondary,
-              child: Icon(Icons.person, size: 35),
+              backgroundColor: context.colors.primary,
+              child: Icon(Icons.person, size: 35, color: Colors.black54),
             ),
           ),
         ),

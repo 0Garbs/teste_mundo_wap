@@ -6,7 +6,7 @@ class ColorsApp {
   ColorsApp._();
   static ColorsApp get i => _instance ??= ColorsApp._();
 
-  Color get primary => const Color(0xFF263868);
+  Color get primary => Colors.blue;
   Color get secondary => const Color(0xFF336699);
   Color get background => const Color(0xFFF1F2F4);
   Color get backgroundApp => const Color.fromARGB(255, 226, 226, 226);
