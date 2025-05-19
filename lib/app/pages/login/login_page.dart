@@ -60,52 +60,46 @@ class _LoginPageState extends BaseState<LoginPage, LoginController> {
         },
         builder: (context, state) {
           return SafeArea(
-            child: Center(
-              child: SingleChildScrollView(
-                padding: const EdgeInsets.symmetric(horizontal: 20),
-                child: Column(
-                  mainAxisSize: MainAxisSize.min,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Padding(
-                      padding: const EdgeInsets.only(
-                        left: 20,
-                        top: 50,
-                        right: 20,
-                      ),
-                      child: Align(
-                        alignment: Alignment.topCenter,
-                        child: SizedBox(
-                          width: context.screenWidth,
-                          child: Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [Text('Login')],
-                          ),
+            child: SingleChildScrollView(
+              padding: const EdgeInsets.symmetric(horizontal: 20),
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  SizedBox(height: context.percentHeight(.1)),
+                  Padding(
+                    padding: const EdgeInsets.only(left: 20, top: 0, right: 20),
+                    child: Align(
+                      alignment: Alignment.topCenter,
+                      child: SizedBox(
+                        width: context.percentWidth(.7),
+                        child: Image.asset(
+                          'assets/images/logo_todo.jpg',
+                          fit: BoxFit.cover,
                         ),
                       ),
                     ),
-                    SizedBox(height: context.percentHeight(.08)),
-                    Text('User:'),
-                    SizedBox(height: 8.0),
-                    TextField(controller: _userController),
-                    SizedBox(height: context.percentHeight(.04)),
-                    Text('Password:'),
-                    SizedBox(height: 8.0),
-                    TextField(controller: _passwordController),
-                    SizedBox(height: context.percentHeight(.1)),
-                    CustomButton(
-                      label: 'Entrar',
-                      width: context.screenWidth,
-                      height: 76,
-                      onPressed: () async {
-                        await controller.login(
-                          user: _userController.text.trim(),
-                          password: _passwordController.text.trim(),
-                        );
-                      },
-                    ),
-                  ],
-                ),
+                  ),
+                  Text('User:'),
+                  SizedBox(height: 8.0),
+                  TextField(controller: _userController),
+                  SizedBox(height: context.percentHeight(.04)),
+                  Text('Password:'),
+                  SizedBox(height: 8.0),
+                  TextField(controller: _passwordController),
+                  SizedBox(height: context.percentHeight(.1)),
+                  CustomButton(
+                    label: 'Entrar',
+                    width: context.screenWidth,
+                    height: 76,
+                    onPressed: () async {
+                      await controller.login(
+                        user: _userController.text.trim(),
+                        password: _passwordController.text.trim(),
+                      );
+                    },
+                  ),
+                ],
               ),
             ),
           );

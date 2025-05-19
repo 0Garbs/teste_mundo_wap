@@ -65,21 +65,19 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
               child: Stack(
                 children: [
                   Padding(
-                    padding: const EdgeInsets.only(
-                      left: 20,
-                      top: 50,
-                      right: 20,
+                    padding: EdgeInsets.only(
+                      left: 0,
+                      top: context.percentHeight(0.12),
+                      right: 0,
                     ),
                     child: Align(
                       alignment: Alignment.topCenter,
                       child: SizedBox(
                         width: context.screenWidth,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: [
-                            Text('Logo'),
-                          ],
-                        )
+                        child: Image.asset(
+                          'assets/images/logo_todo.jpg',
+                          fit: BoxFit.cover,
+                        ),
                       ),
                     ),
                   ),
@@ -87,15 +85,7 @@ class _SplashPageState extends BaseState<SplashPage, SplashController> {
                   Center(
                     child: Column(
                       children: [
-                        SizedBox(height: context.percentHeight(.57)),
-                        SizedBox(height: context.percentHeight(.08)),
-                        CustomButton(
-                          label: 'Criar',
-                          width: context.percentWidth(.9),
-                          height: 76,
-                          onPressed: () async {},
-                        ),
-                        SizedBox(height: context.percentHeight(.02)),
+                        SizedBox(height: context.percentHeight(.74)),
                         CustomButton(
                           label: 'Entrar',
                           width: context.percentWidth(.9),
