@@ -39,8 +39,12 @@ class _TodoPageState extends BaseState<TodoPage, TodoController> {
         leading: IconButton(
           icon:
               Platform.isAndroid
-                  ? Icon(Icons.arrow_back, color: Colors.black)
-                  : Icon(Icons.chevron_left_sharp, color: Colors.black),
+                  ? Icon(Icons.arrow_back, color: Colors.black, size: 40)
+                  : Icon(
+                    Icons.chevron_left_sharp,
+                    color: Colors.black,
+                    size: 40,
+                  ),
           onPressed: () => Navigator.of(context).pop(),
         ),
       ),
@@ -117,6 +121,7 @@ class _TodoPageState extends BaseState<TodoPage, TodoController> {
                     }
                   },
                 ),
+                SizedBox(height: 20),
               ],
             ),
           );
