@@ -2,17 +2,16 @@ import 'dart:io' show Platform;
 
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:flutter_multi_formatter/flutter_multi_formatter.dart';
 import 'package:intl/intl.dart';
 import 'package:teste_mundo_wap/app/core/ui/helpers/size_extensions.dart';
-import 'package:teste_mundo_wap/app/core/ui/styles/text_styles.dart';
+import 'package:teste_mundo_wap/app/pages/todo/widgets/todo_fields.dart';
 
 import '../../core/ui/base_state/base_state.dart';
 import '../../core/ui/widgets/custom_button.dart';
-import '../../models/model_field.dart';
 import '../../models/model_todo.dart';
 import 'todo_controller.dart';
 import 'todo_state.dart';
+import 'widgets/todo_header.dart';
 
 class TodoPage extends StatefulWidget {
   const TodoPage({super.key});
@@ -87,33 +86,18 @@ class _TodoPageState extends BaseState<TodoPage, TodoController> {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(
-                  state.selectedTodo?.name ?? '',
-                  style: context.textStyles.textBold.copyWith(fontSize: 28),
+                TodoHeader(
+                  title: state.selectedTodo?.name ?? '',
+                  description: state.selectedTodo?.description ?? '',
                 ),
-                SizedBox(height: 10),
-                Text(
-                  state.selectedTodo?.description ?? '',
-                  style: context.textStyles.textSemiBold.copyWith(fontSize: 20),
+
+                TodoFields(
+                  formKey: _formKey,
+                  controller1: _controller1,
+                  controller2: _controller2,
+                  fields: state.selectedTodo?.fields ?? [],
                 ),
-                Expanded(
-                  child: SizedBox(
-                    child: Padding(
-                      padding: EdgeInsets.fromLTRB(
-                        0,
-                        context.percentHeight(.04),
-                        0,
-                        0,
-                      ),
-                      child: Form(
-                        key: _formKey,
-                        child: ListView(
-                          children: fields(state.selectedTodo?.fields ?? []),
-                        ),
-                      ),
-                    ),
-                  ),
-                ),
+
                 CustomButton(
                   height: 66,
                   width: context.screenWidth,
@@ -121,8 +105,14 @@ class _TodoPageState extends BaseState<TodoPage, TodoController> {
                   onPressed: () async {
                     if (_formKey.currentState!.validate()) {
                       await controller.finishTodo(
-                        _controller1.text,
-                        _controller2.text,
+                        convertToSpecificType(
+                          _controller1.text,
+                          state.selectedTodo!.fields[0].type,
+                        ),
+                        convertToSpecificType(
+                          _controller2.text,
+                          state.selectedTodo!.fields[1].type,
+                        ),
                       );
                     }
                   },
@@ -135,115 +125,26 @@ class _TodoPageState extends BaseState<TodoPage, TodoController> {
     );
   }
 
-  List<Widget> fields(List<ModelField> questions) {
-    return questions.isNotEmpty
-        ? [
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  questions[0].label,
-                  style: context.textStyles.textMedium.copyWith(fontSize: 16.0),
-                ),
-                SizedBox(height: 8.0),
-                textFieldByType(
-                  questions[0].type,
-                  questions[0].obligatory,
-                  _controller1,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.only(bottom: 20.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  questions[1].label,
-                  style: context.textStyles.textMedium.copyWith(fontSize: 16.0),
-                ),
-                SizedBox(height: 8.0),
-                textFieldByType(
-                  questions[1].type,
-                  questions[1].obligatory,
-                  _controller2,
-                ),
-              ],
-            ),
-          ),
-        ]
-        : [];
-  }
-
-  Widget textFieldByType(
-    String type,
-    bool obligatory,
-    TextEditingController controller,
-  ) {
+  String convertToSpecificType(String text, String type) {
     switch (type) {
       case 'text':
-        return TextFormField(
-          controller: controller,
-          validator: (value) {
-            if ((value == null || value.isEmpty) && obligatory) {
-              return 'Campo obrigatorio';
-            }
-            return null;
-          },
-        );
+        return text;
       case 'mask_price':
-        return TextFormField(
-          controller: controller,
-          keyboardType: TextInputType.number,
-          inputFormatters: [
-            CurrencyInputFormatter(
-              leadingSymbol: 'R\$',
-              thousandSeparator: ThousandSeparator.Period,
-              useSymbolPadding: true,
-            ),
-          ],
-          validator: (value) {
-            if ((value == null || value.isEmpty) && obligatory) {
-              return 'Campo obrigatorio';
-            }
-            return null;
-          },
-        );
-      case 'mask_date':
-        return TextFormField(
-          controller: controller,
-          readOnly: true,
-          decoration: InputDecoration(
-            border: OutlineInputBorder(),
-            suffixIcon: Icon(Icons.calendar_today),
-          ),
-          onTap: () async {
-            DateTime? data = await showDatePicker(
-              context: context,
-              initialDate: DateTime.now(),
-              firstDate: DateTime(1900),
-              lastDate: DateTime(2100),
-              locale: const Locale('pt', 'BR'),
-            );
+        final value =
+            text
+                .replaceAll("R\$", "")
+                .replaceAll(".", "")
+                .replaceAll(",", ".")
+                .trim();
 
-            if (data != null) {
-              setState(() {
-                controller.text = DateFormat('dd/MM/yyyy').format(data);
-              });
-            }
-          },
-          validator: (value) {
-            if ((value == null || value.isEmpty) && obligatory) {
-              return 'Campo obrigatorio';
-            }
-            return null;
-          },
-        );
+        return value;
+      case 'mask_date':
+        DateTime dataConvertida = DateFormat('dd/MM/yyyy').parse(text);
+        String value = dataConvertida.toIso8601String();
+
+        return value;
       default:
-        return Text('Campo não implementado');
+        return '';
     }
   }
 }
